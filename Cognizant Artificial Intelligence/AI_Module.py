@@ -88,3 +88,12 @@ def train_model(
     trained_model = model.fit(X_train, y_train)
 
     # Generate predictions on test samples
+    y_pred = trained_model.predict(X_test)
+
+    # Compute accuracy, using mean absolute error
+    mae = mean_accuracy_error(y_true=y_test, y_pred=y_pred)
+    accuracy.append(mae)
+    print(f"Fold {fold + 1}: MAE = {mae:.3f}")
+
+# Finish by printing the average mean absolute error across all folds
+print(f"Average MAE: {(sum(accuracy) / len(accuracy)):.2f}")
