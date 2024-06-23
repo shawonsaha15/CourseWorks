@@ -49,3 +49,42 @@ def create_target_and_predictors(
   X = data.drop(columns=[target])
   y = data[target]
   return X, y
+
+# Train model
+def train_model(
+    X = pd.DataFrame = None
+    y = pd.Series = None
+):
+  """
+  This function takes the predictor and target variables and trains a Random
+  Forest Regressor model across K folds. Using cross-validation, performance
+  metrics will be output for each fold during training.
+
+  :param X: pd.DataFrame, predictor variables
+  :param y: pd.Series, target variable
+
+  :return
+  """
+  # Create a list that wil store the accuracy for each folds
+  accuracy = []
+
+  # Enter a loop to run K folds of cross-validation
+  for fold in range(0,K):
+
+    # Instantiate algorithm and scalar
+    model = RandomForestRegressor()
+    scalar = StandardScalar()
+
+    # Create training and testing samples
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=SPLIT,
+                                                        random_state=42)
+
+    # Scale the data
+    scaler.fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    # Train the model
+    trained_model = model.fit(X_train, y_train)
+
+    # Generate predictions on test samples
